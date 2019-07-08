@@ -12,8 +12,6 @@ const teamToIDs = {
 const formatData = (data, team) => {
     let formatedData = JSON.parse(data);
     const teamId = teamToIDs[team]
-    console.log(teamId)
-    
     formatedData = formatedData.league.standard
     formatedData = formatedData.filter(d=>d.teamId == teamId && d.isActive)
         .map(d=>{
@@ -28,7 +26,14 @@ server.use(express.static(path.join(__dirname, 'node_modules')))
 server.get('/teams/:teamName', (req, res)=>{
     const team = req.params.teamName
     request.get('http://data.nba.net/10s/prod/v1/2018/players.json', (err, data)=>{
-        res.send(formatData(data.body, team))
+        const formatedData = formatData(data.body, team)
+        res.send(formatedData)
+        formatedData.forEach(d=>{
+            console.log(d.firstName.toLowerCase(), d.lastName.toLowerCase())
+            request.get(`https://nba-players.herokuapp.com/players/${d.lastName.toLowerCase()}/${d.firstName.toLowerCase()}`, (err, data)=>{
+                res.send(console.log(data))
+            })
+        })
     })
 })
 

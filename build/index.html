@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Title</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>NBA Roster</h1>
+        </header>
 
-<header>
-    <h1>NBA Roster</h1>
-</header>
+        <main>
+            <input type="text" id="team-input" placeholder="Search team" />
+            <button id="show-roster-btn" onclick="getRoster()">
+                get Roster
+            </button>
+            <div id="roster"></div>
+        </main>
 
-<main>
-    <button id="show-roster-btn" onclick=showRoster()>Show Roster</button>
-</main>
-<footer></footer>
+        <!-- HANDLEBARS TEMPLATES -->
+        <script id="roster-template" type="test/text/x-handlebars-template">
+            {{#each data}}
+            <div class="player">
+                <img src="" alt="">
+                <div class="player-name">{{firstName}} {{lastName}}</div>
+                <div class="player-pos">{{pos}}</div>
+                <div class="player-jersey">{{jersey}}</div>
+            </div>
+            {{/each}}
+        </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="js/Renderer.js"></script>
-<script src="js/Logic.js"></script>
-<script src="js/main.js"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="js/Renderer.js"></script>
+        <script src="js/Logic.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

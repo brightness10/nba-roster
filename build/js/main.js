@@ -1,11 +1,13 @@
+const renderer = new Renderer
 
-
-const showRoster = () => {
+const getRoster = () => {
+    const teamInput = $('#team-input')
+    const teamVal = teamInput.val().toLowerCase()
     $.ajax({
         method: "GET",
-        url: "/teams/heat",
+        url: `/teams/${teamVal}`,
         success: data => {
-            console.log(data)
+            renderer.renderRoster(data)
         },
         error: (xhr, text, error) => console.log(xhr, text, error)
     });
